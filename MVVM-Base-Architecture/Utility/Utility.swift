@@ -1,0 +1,6 @@
+
+import SwiftUI
+
+func globalUtility(){
+    
+}

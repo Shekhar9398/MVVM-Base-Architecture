@@ -3,7 +3,8 @@ import SwiftUI
 
 enum NetworkError: Error {
     case noData
+    case noAccessToken
     case invalidResponse
-    case decodingError
-    case other(String)   
+    case unauthorized
 }
+

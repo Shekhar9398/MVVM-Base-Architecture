@@ -7,7 +7,7 @@ class UserViewModel: ObservableObject {
     @Published var state: ViewState = .idle
     @Published var errorMessage: String?
 
-    private let userRepository = UserRepository()
+    private let userService = UserService()
 
     // Fetch token using username and password
     func fetchToken(username: String, password: String) {
@@ -34,7 +34,7 @@ class UserViewModel: ObservableObject {
     private func fetchUserData() {
         state = .loading
 
-        userRepository.fetchUserData { [weak self] result in
+        userService.getUser { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let user):

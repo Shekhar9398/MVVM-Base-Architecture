@@ -4,7 +4,8 @@ class UserRepository {
     private let networkManager = NetworkManager.shared
 
     func fetchUserData(completion: @escaping (Result<UserModel, Error>) -> Void) {
-        networkManager.requestWithToken(endpoint: "/auth/me") { result in
+        let endpoint: UserEndpoint = .getUserData
+        networkManager.requestWithToken(endpoint: endpoint) { result in
             switch result {
             case .success(let data):
                 do {

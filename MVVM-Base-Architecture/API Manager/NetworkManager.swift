@@ -8,17 +8,8 @@ class NetworkManager {
 
     // Fetch the login token
     func fetchAuthToken(username: String, password: String, completion: @escaping (Result<String, Error>) -> Void) {
-        let url = baseURL.appendingPathComponent("/auth/login")
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-
-        let body: [String: Any] = [
-            "username": username,
-            "password": password,
-            "expiresInMins": 30
-        ]
-        request.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
+        let endpoint = AuthEndpoint.login(username: username, password: password)
+        var request = endpoint.createRequest(baseURL: baseURL)
 
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
@@ -41,15 +32,13 @@ class NetworkManager {
     }
 
     // Make a general API request with a token
-    func requestWithToken(endpoint: String, completion: @escaping (Result<Data, Error>) -> Void) {
+    func requestWithToken(endpoint: Endpoint, completion: @escaping (Result<Data, Error>) -> Void) {
         guard let token = TokenManager.shared.getToken() else {
             completion(.failure(NetworkError.noAccessToken))
             return
         }
 
-        let url = baseURL.appendingPathComponent(endpoint)
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
+        var request = endpoint.createRequest(baseURL: baseURL)
         request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
 
         URLSession.shared.dataTask(with: request) { data, response, error in
@@ -67,4 +56,3 @@ class NetworkManager {
         }.resume()
     }
 }
-

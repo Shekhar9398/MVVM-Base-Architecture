@@ -15,7 +15,7 @@
 		F40760062D436DCC005753E9 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40760052D436DCC005753E9 /* NetworkError.swift */; };
 		F40760092D4370E3005753E9 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40760082D4370E3005753E9 /* Utility.swift */; };
 		F407600B2D43727B005753E9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F407600A2D43727B005753E9 /* ContentView.swift */; };
-		F407600E2D43C490005753E9 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = F407600D2D43C490005753E9 /* Service.swift */; };
+		F407600E2D43C490005753E9 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F407600D2D43C490005753E9 /* UserService.swift */; };
 		F43AAE182D40CCB100E71F4E /* MVVM_Base_ArchitectureApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43AAE172D40CCB100E71F4E /* MVVM_Base_ArchitectureApp.swift */; };
 		F43AAE1C2D40CCB200E71F4E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F43AAE1B2D40CCB200E71F4E /* Assets.xcassets */; };
 		F43AAE1F2D40CCB200E71F4E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F43AAE1E2D40CCB200E71F4E /* Preview Assets.xcassets */; };
@@ -36,7 +36,7 @@
 		F40760052D436DCC005753E9 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		F40760082D4370E3005753E9 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		F407600A2D43727B005753E9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		F407600D2D43C490005753E9 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		F407600D2D43C490005753E9 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		F43AAE142D40CCB100E71F4E /* MVVM-Base-Architecture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MVVM-Base-Architecture.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F43AAE172D40CCB100E71F4E /* MVVM_Base_ArchitectureApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVVM_Base_ArchitectureApp.swift; sourceTree = "<group>"; };
 		F43AAE1B2D40CCB200E71F4E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -71,7 +71,7 @@
 		F407600C2D43C46A005753E9 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				F407600D2D43C490005753E9 /* Service.swift */,
+				F407600D2D43C490005753E9 /* UserService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -261,7 +261,7 @@
 			files = (
 				F40760092D4370E3005753E9 /* Utility.swift in Sources */,
 				F43AAE452D40D0FD00E71F4E /* Extension.swift in Sources */,
-				F407600E2D43C490005753E9 /* Service.swift in Sources */,
+				F407600E2D43C490005753E9 /* UserService.swift in Sources */,
 				F407600B2D43727B005753E9 /* ContentView.swift in Sources */,
 				F43AAE362D40CE9400E71F4E /* UserView.swift in Sources */,
 				F4E279092D48BA08004429E1 /* LoginResponse.swift in Sources */,

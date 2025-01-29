@@ -1,15 +1,15 @@
-
-import Foundation
+import SwiftUI
 
 @MainActor
-class AuthViewModel: ObservableObject {
-    @Published var auth: AuthModel?
+class UserViewModel: ObservableObject {
+    @Published var user: UserModel?
     @Published var token: String?
     @Published var state: ViewState = .idle
     @Published var errorMessage: String?
-    private let authService = AuthService()
-    
 
+    private let userService = UserService()
+
+    /// Mark:-  Fetch token using username and password
     func fetchToken(username: String, password: String) {
         state = .loading
         errorMessage = nil
@@ -21,7 +21,7 @@ class AuthViewModel: ObservableObject {
                     self?.token = token
                     TokenManager.shared.setToken(token)
                     self?.state = .data
-                    self?.fetchAuthData()
+                    self?.fetchUserData()
                 case .failure(let error):
                     self?.errorMessage = error.localizedDescription
                     self?.state = .error
@@ -29,22 +29,23 @@ class AuthViewModel: ObservableObject {
             }
         }
     }
-    
-    // Fetch token using username and password
-     func fetchAuthData() {
+
+    ///Mark:-  Fetch user data using the token
+    private func fetchUserData() {
         state = .loading
 
-        authService.getAuth { result in
+        userService.getUser { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
-                case .success(let auth):
-                    self.auth = auth
-                    self.state = .data
+                case .success(let user):
+                    self?.user = user
+                    self?.state = .data
                 case .failure(let error):
-                    self.errorMessage = error.localizedDescription
-                    self.state = .error
+                    self?.errorMessage = error.localizedDescription
+                    self?.state = .error
                 }
             }
         }
     }
 }
+

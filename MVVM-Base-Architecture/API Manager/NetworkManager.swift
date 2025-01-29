@@ -37,6 +37,8 @@ class NetworkManager {
             completion(.failure(NetworkError.noAccessToken))
             return
         }
+            
+            //Also add the func to add body/query in req
 
         var request = endpoint.createRequest(baseURL: baseURL)
         request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")

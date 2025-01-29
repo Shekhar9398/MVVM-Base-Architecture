@@ -18,7 +18,6 @@ struct AuthView: View {
                     .padding()
             case .error:
                 Text("error while fetching token")
-                 
             }
         }
         .onAppear{

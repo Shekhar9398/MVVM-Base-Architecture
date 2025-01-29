@@ -1,15 +1,16 @@
-import SwiftUI
+
+import Foundation
 
 @MainActor
-class UserViewModel: ObservableObject {
-    @Published var user: UserModel?
+class AuthViewModel: ObservableObject {
+    @Published var auth: AuthModel?
     @Published var token: String?
     @Published var state: ViewState = .idle
     @Published var errorMessage: String?
-
-    private let userService = UserService()
-
-    // Fetch token using username and password
+    
+    private let authService = AuthService()
+    
+///Mark :- Fetch token for auth
     func fetchToken(username: String, password: String) {
         state = .loading
         errorMessage = nil
@@ -21,7 +22,7 @@ class UserViewModel: ObservableObject {
                     self?.token = token
                     TokenManager.shared.setToken(token)
                     self?.state = .data
-                    self?.fetchUserData()
+                    self?.fetchAuthData()
                 case .failure(let error):
                     self?.errorMessage = error.localizedDescription
                     self?.state = .error
@@ -29,23 +30,22 @@ class UserViewModel: ObservableObject {
             }
         }
     }
-
-    // Fetch user data using the token
-    private func fetchUserData() {
+    
+    ///Mark:-  Fetch Data for auth
+     func fetchAuthData() {
         state = .loading
 
-        userService.getUser { [weak self] result in
+        authService.getAuth { result in
             DispatchQueue.main.async {
                 switch result {
-                case .success(let user):
-                    self?.user = user
-                    self?.state = .data
+                case .success(let auth):
+                    self.auth = auth
+                    self.state = .data
                 case .failure(let error):
-                    self?.errorMessage = error.localizedDescription
-                    self?.state = .error
+                    self.errorMessage = error.localizedDescription
+                    self.state = .error
                 }
             }
         }
     }
 }
-

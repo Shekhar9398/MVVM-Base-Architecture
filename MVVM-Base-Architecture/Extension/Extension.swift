@@ -2,6 +2,6 @@
 import SwiftUI
 
 extension String {
-    
+
 }
 

@@ -6,7 +6,7 @@ class NetworkManager {
 
     let baseURL = URL(string: "https://dummyjson.com")!
 
-    // Fetch the login token
+    ///Mark: - Token Request
     func fetchAuthToken(username: String, password: String, completion: @escaping (Result<String, Error>) -> Void) {
         let endpoint = AuthEndpoint.login(username: username, password: password)
         var request = endpoint.createRequest(baseURL: baseURL)
@@ -23,7 +23,7 @@ class NetworkManager {
             }
 
             do {
-                let response = try JSONDecoder().decode(LoginResponse.self, from: data)
+                let response = try JSONDecoder().decode(AuthModel.self, from: data)
                 completion(.success(response.token))
             } catch {
                 completion(.failure(error))
@@ -31,8 +31,8 @@ class NetworkManager {
         }.resume()
     }
 
-    // Make a general API request with a token
-    func requestWithToken(endpoint: Endpoint, completion: @escaping (Result<Data, Error>) -> Void) {
+    /// Mark: - Request with Token
+        func requestWithToken(endpoint: Endpoint, completion: @escaping (Result<Data, Error>) -> Void) {
         guard let token = TokenManager.shared.getToken() else {
             completion(.failure(NetworkError.noAccessToken))
             return

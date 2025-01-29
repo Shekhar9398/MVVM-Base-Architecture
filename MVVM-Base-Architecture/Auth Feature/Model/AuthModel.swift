@@ -1,7 +1,7 @@
 
 import Foundation
 
-struct LoginResponse: Codable {
+struct AuthModel: Codable {
     let id: Int
     let username: String
     let token: String

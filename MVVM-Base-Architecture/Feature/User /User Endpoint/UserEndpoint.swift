@@ -1,21 +1,21 @@
-
 import Foundation
 
 enum UserEndpoint: Endpoint {
     case getUserData
 
     var path: String {
-        switch self {
-        case .getUserData:
-            return "/auth/me"
-        }
+        return "/auth/me"
     }
 
-    var method: String {
-        return "GET"
+    var method: HTTPMethod {
+        return .GET
     }
 
     var headers: [String: String]? {
+        return nil
+    }
+
+    var queryParameters: [String: String]? {
         return nil
     }
 

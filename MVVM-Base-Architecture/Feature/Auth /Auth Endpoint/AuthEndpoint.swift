@@ -1,22 +1,22 @@
-
 import Foundation
 
 enum AuthEndpoint: Endpoint {
     case login(username: String, password: String)
 
     var path: String {
-        switch self {
-        case .login:
-            return "/auth/login"
-        }
+        return "/auth/login"
     }
 
-    var method: String {
-        return "POST"
+    var method: HTTPMethod {
+        return .POST
     }
 
     var headers: [String: String]? {
         return ["Content-Type": "application/json"]
+    }
+
+    var queryParameters: [String: String]? {
+        return nil
     }
 
     var body: Data? {
@@ -31,4 +31,3 @@ enum AuthEndpoint: Endpoint {
         }
     }
 }
-

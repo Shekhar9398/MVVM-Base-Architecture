@@ -6,10 +6,19 @@ class NetworkManager {
 
     let baseURL = URL(string: "https://dummyjson.com")!
 
-    ///Mark: - Token Request
-    func fetchAuthToken(username: String, password: String, completion: @escaping (Result<String, Error>) -> Void) {
-        let endpoint = AuthEndpoint.login(username: username, password: password)
+    ///Mark:- Generic request method supporting all HTTP methods and body data
+    func request<T: Decodable>(
+        endpoint: Endpoint,
+        responseType: T.Type,
+        requiresAuth: Bool = false,
+        completion: @escaping (Result<T, Error>) -> Void
+    ) {
         var request = endpoint.createRequest(baseURL: baseURL)
+
+        ///Mark:-  Add authentication if required
+        if requiresAuth, let token = TokenManager.shared.getToken() {
+            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        }
 
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
@@ -23,38 +32,11 @@ class NetworkManager {
             }
 
             do {
-                let response = try JSONDecoder().decode(AuthModel.self, from: data)
-                completion(.success(response.token))
+                let decodedResponse = try JSONDecoder().decode(T.self, from: data)
+                completion(.success(decodedResponse))
             } catch {
                 completion(.failure(error))
             }
-        }.resume()
-    }
-
-    /// Mark: - Request with Token
-        func requestWithToken(endpoint: Endpoint, completion: @escaping (Result<Data, Error>) -> Void) {
-        guard let token = TokenManager.shared.getToken() else {
-            completion(.failure(NetworkError.noAccessToken))
-            return
-        }
-            
-            //Also add the func to add body/query in req
-
-        var request = endpoint.createRequest(baseURL: baseURL)
-        request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
-                completion(.failure(error))
-                return
-            }
-
-            guard let data = data else {
-                completion(.failure(NetworkError.noData))
-                return
-            }
-
-            completion(.success(data))
         }.resume()
     }
 }

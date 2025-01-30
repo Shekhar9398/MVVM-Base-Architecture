@@ -7,19 +7,20 @@ class UserViewModel: ObservableObject {
     @Published var state: ViewState = .idle
     @Published var errorMessage: String?
 
-    private let userService = UserService()
+    private let authRepository = AuthRepository()
+    private let userRepository = UserRepository()
 
-    /// Mark:-  Fetch token using username and password
+    ///Mark:- Fetch token using username and password
     func fetchToken(username: String, password: String) {
         state = .loading
         errorMessage = nil
 
-        NetworkManager.shared.fetchAuthToken(username: username, password: password) { [weak self] result in
+        authRepository.fetchAuthData { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
-                case .success(let token):
-                    self?.token = token
-                    TokenManager.shared.setToken(token)
+                case .success(let authModel):
+                    self?.token = authModel.token
+                    TokenManager.shared.setToken(authModel.token)
                     self?.state = .data
                     self?.fetchUserData()
                 case .failure(let error):
@@ -30,11 +31,11 @@ class UserViewModel: ObservableObject {
         }
     }
 
-    ///Mark:-  Fetch user data using the token
+    ///Mark:- Fetch user data using the token
     private func fetchUserData() {
         state = .loading
 
-        userService.getUser { [weak self] result in
+        userRepository.fetchUserData { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let user):
@@ -48,4 +49,3 @@ class UserViewModel: ObservableObject {
         }
     }
 }
-

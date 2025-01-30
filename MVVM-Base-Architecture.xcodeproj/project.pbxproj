@@ -33,6 +33,7 @@
 		F43AAE362D40CE9400E71F4E /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43AAE352D40CE9400E71F4E /* UserView.swift */; };
 		F43AAE432D40D01B00E71F4E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43AAE422D40D01B00E71F4E /* NetworkManager.swift */; };
 		F43AAE452D40D0FD00E71F4E /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43AAE442D40D0FD00E71F4E /* Extension.swift */; };
+		F445FAC22D4B50F5007BEADE /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = F445FAC12D4B50F5007BEADE /* HTTPMethod.swift */; };
 		F4E279092D48BA08004429E1 /* AuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E279082D48BA08004429E1 /* AuthModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +65,7 @@
 		F43AAE352D40CE9400E71F4E /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
 		F43AAE422D40D01B00E71F4E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		F43AAE442D40D0FD00E71F4E /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		F445FAC12D4B50F5007BEADE /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		F4E279082D48BA08004429E1 /* AuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -330,6 +332,7 @@
 			isa = PBXGroup;
 			children = (
 				F43AAE422D40D01B00E71F4E /* NetworkManager.swift */,
+				F445FAC12D4B50F5007BEADE /* HTTPMethod.swift */,
 				F4075FFB2D436B3B005753E9 /* TokenManager.swift */,
 				F40760052D436DCC005753E9 /* NetworkError.swift */,
 			);
@@ -416,6 +419,7 @@
 				F40760042D436D8B005753E9 /* ViewState.swift in Sources */,
 				F430E3E22D4A3BA900EE0326 /* LoginService.swift in Sources */,
 				F430E3D42D49FEDF00EE0326 /* AuthViewModel.swift in Sources */,
+				F445FAC22D4B50F5007BEADE /* HTTPMethod.swift in Sources */,
 				F430E3D62D49FEF100EE0326 /* AuthService.swift in Sources */,
 				F43AAE432D40D01B00E71F4E /* NetworkManager.swift in Sources */,
 				F4075FFE2D436BEB005753E9 /* Endpoint.swift in Sources */,

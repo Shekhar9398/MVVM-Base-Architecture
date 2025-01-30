@@ -1,26 +1,47 @@
-
 import SwiftUI
 
 struct AuthView: View {
     @StateObject private var viewModel = AuthViewModel()
     
     var body: some View {
-        VStack {
+        VStack(spacing: 20) {
             switch viewModel.state {
             case .idle:
-                Text("staring")
+                Text("Starting authentication...")
+                    .foregroundColor(.gray)
+
             case .loading:
-                Text("Please Wait")
-            case .data:
-                Text("Token \(viewModel.auth?.token ?? " No Token")")
-                    .foregroundStyle(Color.mint)
-                    .bold()
-                    .padding()
-            case .error:
-                Text("error while fetching token")
+                ProgressView("Please wait...") // Shows a loading indicator
+
+            case .data(let authModel):
+                VStack {
+                    Text("Authentication Successful!")
+                        .font(.headline)
+                        .foregroundColor(.green)
+
+                    Text("Token: \(authModel.token)")
+                        .font(.subheadline)
+                        .padding()
+                        .background(Color.mint.opacity(0.2))
+                        .cornerRadius(10)
+                        .padding(.horizontal)
+                }
+
+            case .error(let errorMessage):
+                VStack {
+                    Text("Authentication Failed")
+                        .foregroundColor(.red)
+                        .bold()
+
+                    Text(errorMessage)
+                        .foregroundColor(.gray)
+                        .multilineTextAlignment(.center)
+                        .padding()
+                }
             }
         }
-        .onAppear{
+        .padding()
+        .onAppear {
             viewModel.fetchToken(username: "emilys", password: "emilyspass")
         }
     }

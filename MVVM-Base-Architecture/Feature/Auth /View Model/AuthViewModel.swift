@@ -2,17 +2,14 @@ import Foundation
 
 @MainActor
 class AuthViewModel: ObservableObject {
-    @Published var auth: AuthModel?
     @Published var token: String?
-    @Published var state: ViewState = .idle
-    @Published var errorMessage: String?
+    @Published var state: ViewState<AuthModel> = .idle
 
     private let authRepository = AuthRepository()
 
-    /// Fetch token for authentication
+    ///Mark:- Fetch token for authentication
     func fetchToken(username: String, password: String) {
         state = .loading
-        errorMessage = nil
 
         let endpoint = AuthEndpoint.login(username: username, password: password)
         
@@ -25,17 +22,15 @@ class AuthViewModel: ObservableObject {
                 case .success(let authModel):
                     self?.token = authModel.token
                     TokenManager.shared.setToken(authModel.token)
-                    self?.state = .data
-                    self?.fetchAuthData() // Fetch user data after getting the token
+                    self?.fetchAuthData()
                 case .failure(let error):
-                    self?.errorMessage = error.localizedDescription
-                    self?.state = .error
+                    self?.state = .error(errorMessage: error.localizedDescription)
                 }
             }
         }
     }
 
-    /// Fetch authenticated user data
+    ///Mark:-  Fetch authenticated user data
     func fetchAuthData() {
         state = .loading
 
@@ -43,11 +38,9 @@ class AuthViewModel: ObservableObject {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let auth):
-                    self?.auth = auth
-                    self?.state = .data
+                    self?.state = .data(model: auth)
                 case .failure(let error):
-                    self?.errorMessage = error.localizedDescription
-                    self?.state = .error
+                    self?.state = .error(errorMessage: error.localizedDescription)
                 }
             }
         }

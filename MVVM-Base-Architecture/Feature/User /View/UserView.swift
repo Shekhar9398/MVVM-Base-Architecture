@@ -13,10 +13,8 @@ struct UserView: View {
             case .loading:
                 ProgressView("Loading...")
                     .padding()
-            case .data:
-                if let user = viewModel.user {
+            case .data(model: let user):
                     VStack(alignment: .center) {
-                        // Avatar Image
                         if let imageURL = URL(string: user.image) {
                             AsyncImage(url: imageURL) { image in
                                 image.resizable()
@@ -58,9 +56,9 @@ struct UserView: View {
                     .padding()
                     .background(RoundedRectangle(cornerRadius: 12).fill(Color.white).shadow(radius: 10))
                     .padding(.horizontal)
-                }
-            case .error:
-                Text(viewModel.errorMessage ?? "Something went wrong.")
+                
+            case .error(let error):
+                Text("Something went wrong\(error).")
                     .foregroundColor(.red)
                     .padding()
             }

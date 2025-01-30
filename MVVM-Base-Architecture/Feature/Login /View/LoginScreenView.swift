@@ -1,15 +1,17 @@
-
 import SwiftUI
 
 struct LoginScreenView: View {
     @State private var userName = ""
     @State private var passWord = ""
     @State private var giveLoginAcess = false
+    @State private var errorMessage = ""
+    
+    @StateObject var viewModel = LoginViewModel()
     
     var body: some View {
-        NavigationView{
+        NavigationView {
             VStack {
-                ///Mark:- username and password
+                ///Mark:- Username and password input fields
                 VStack(alignment: .leading) {
                     Text("Username")
                         .font(.title2)
@@ -33,14 +35,24 @@ struct LoginScreenView: View {
                 }
                 .padding(.horizontal)
                 
-                ///Mark:- travel to Homescreen
-                NavigationLink(destination: UserView(), isActive: $giveLoginAcess){
-                    
+                ///Mark:- Handle different states (loading, error, etc.)
+                if !viewModel.isLoggedIn && viewModel.errorMessage != nil {
+                    Text(viewModel.errorMessage ?? "")
+                        .foregroundColor(.red)
+                        .padding()
                 }
                 
-                ///Mark: - login Button
+                ///Mark:- Navigation to the next screen
+                NavigationLink(destination: UserView(), isActive: $giveLoginAcess) {
+                    EmptyView()
+                }
+                
+                ///Mark:- Login Button
                 Button(action: {
-                    if userName == "Shekhar" && passWord == "Shekhar@123" {
+                    viewModel.checkLoginCredentials(inputUsername: userName, inputPassword: passWord)
+                    
+                    // If login is successful, grant access
+                    if viewModel.isLoggedIn {
                         giveLoginAcess = true
                     }
                 }, label: {
@@ -51,11 +63,13 @@ struct LoginScreenView: View {
                         .foregroundColor(.white)
                         .background(Color.purple)
                         .cornerRadius(10)
-                    
                 })
             }
+            .padding()
+            .onAppear {
+                viewModel.setupUserCredentials()
+            }
         }
-        
     }
 }
 

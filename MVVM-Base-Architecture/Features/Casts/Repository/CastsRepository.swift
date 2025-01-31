@@ -2,12 +2,13 @@ import Foundation
 
 class CastsRepository {
     private let networkManager = NetworkManager.shared
+    private let baseUrl = "https://klipy-gifs-stickers-clips.p.rapidapi.com"
 
     func fetchCastsData(completion: @escaping (Result<CastsModel, Error>) -> Void) {
         let endpoint = CastsEndpoint.getCastsData
         
         networkManager.request(
-            baseURL: "https://klipy-gifs-stickers-clips.p.rapidapi.com",
+            baseURL: baseUrl,
             endpoint: endpoint.path,
             method: endpoint.method,
             parameters: endpoint.queryParameters,

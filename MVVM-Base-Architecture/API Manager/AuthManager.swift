@@ -18,7 +18,7 @@ class AuthManager {
             parameters: parameters,
             headers: loginEndpoint.headers,
             requiresAuth: false,
-            responseType: TokenResponse.self
+            responseType: TokenModel.self
         ) { result in
             switch result {
             case .success(let tokenResponse):

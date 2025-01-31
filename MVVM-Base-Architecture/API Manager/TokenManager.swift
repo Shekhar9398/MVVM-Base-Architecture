@@ -25,7 +25,7 @@ class TokenManager {
             parameters: parameters,
             headers: refreshEndpoint.headers,
             requiresAuth: false,
-            responseType: TokenResponse.self
+            responseType: TokenModel.self
         ) { result in
             switch result {
             case .success(let tokenResponse):

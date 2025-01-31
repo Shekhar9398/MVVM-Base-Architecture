@@ -22,7 +22,7 @@
 		F430E3DF2D4A3AFE00EE0326 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F430E3DE2D4A3AFE00EE0326 /* LoginViewModel.swift */; };
 		F430E3E22D4A3BA900EE0326 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F430E3E12D4A3BA900EE0326 /* LoginService.swift */; };
 		F430E3E52D4A3BF500EE0326 /* LoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F430E3E42D4A3BF500EE0326 /* LoginRepository.swift */; };
-		F4378D022D4CB07900914288 /* TokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4378D012D4CB07900914288 /* TokenResponse.swift */; };
+		F4378D022D4CB07900914288 /* TokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4378D012D4CB07900914288 /* TokenModel.swift */; };
 		F4378D042D4CE3F800914288 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4378D032D4CE3F800914288 /* NetworkManager.swift */; };
 		F4378D062D4CE41C00914288 /* TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4378D052D4CE41C00914288 /* TokenStorage.swift */; };
 		F4378D082D4CF1EF00914288 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4378D072D4CF1EF00914288 /* AuthManager.swift */; };
@@ -58,7 +58,7 @@
 		F430E3DE2D4A3AFE00EE0326 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		F430E3E12D4A3BA900EE0326 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		F430E3E42D4A3BF500EE0326 /* LoginRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRepository.swift; sourceTree = "<group>"; };
-		F4378D012D4CB07900914288 /* TokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenResponse.swift; sourceTree = "<group>"; };
+		F4378D012D4CB07900914288 /* TokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenModel.swift; sourceTree = "<group>"; };
 		F4378D032D4CE3F800914288 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		F4378D052D4CE41C00914288 /* TokenStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenStorage.swift; sourceTree = "<group>"; };
 		F4378D072D4CF1EF00914288 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
@@ -125,7 +125,7 @@
 			children = (
 				F430E3CC2D49FBDC00EE0326 /* UserEndpoint.swift */,
 				F42A19CF2D4B9EC8007CEF8A /* TokenEndpoint.swift */,
-				F4378D012D4CB07900914288 /* TokenResponse.swift */,
+				F4378D012D4CB07900914288 /* TokenModel.swift */,
 			);
 			path = "User Endpoint";
 			sourceTree = "<group>";
@@ -426,7 +426,7 @@
 			files = (
 				F430E3E52D4A3BF500EE0326 /* LoginRepository.swift in Sources */,
 				F4CF1A4E2D4B852400BF1416 /* CastsEndpoint.swift in Sources */,
-				F4378D022D4CB07900914288 /* TokenResponse.swift in Sources */,
+				F4378D022D4CB07900914288 /* TokenModel.swift in Sources */,
 				F430E3DF2D4A3AFE00EE0326 /* LoginViewModel.swift in Sources */,
 				F43AAE452D40D0FD00E71F4E /* Extension.swift in Sources */,
 				F4378D042D4CE3F800914288 /* NetworkManager.swift in Sources */,

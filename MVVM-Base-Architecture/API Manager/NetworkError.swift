@@ -2,9 +2,8 @@
 import SwiftUI
 
 enum NetworkError: Error {
+    case invalidURL
     case noData
-    case noAccessToken
-    case invalidResponse
-    case unauthorized
+    case decodingError
+    case serverError(String)
 }
-

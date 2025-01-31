@@ -43,7 +43,7 @@ struct LoginScreenView: View {
                 }
                 
                 ///Mark:- Navigation to the next screen
-                NavigationLink(destination: UserView(), isActive: $giveLoginAcess) {
+                NavigationLink(destination: CastsView(), isActive: $giveLoginAcess) {
                     EmptyView()
                 }
                 

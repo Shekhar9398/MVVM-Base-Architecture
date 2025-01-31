@@ -64,7 +64,7 @@ struct UserView: View {
             }
         }
         .onAppear {
-            viewModel.fetchToken(username: "emilys", password: "emilyspass")
+            viewModel.login(username: "emilys", password: "emilyspass")
         }
         .navigationTitle("User Profile")
         .background(Color.gray.opacity(0.1).edgesIgnoringSafeArea(.all)) 

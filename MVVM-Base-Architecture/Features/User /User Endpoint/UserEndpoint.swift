@@ -4,15 +4,15 @@ enum UserEndpoint: Endpoint {
     case getUserData
 
     var path: String {
-        return "/auth/me"
+        return "/user/me"
     }
 
     var method: HTTPMethod {
-        return .GET
+        return .get  
     }
 
     var headers: [String: String]? {
-        return nil
+        return nil 
     }
 
     var queryParameters: [String: String]? {

@@ -1,5 +1,6 @@
 import Foundation
 
+/// MARK: - Token Storage
 class TokenStorage {
     private let tokenKey = "authToken"
     private let refreshTokenKey = "refreshToken"
@@ -7,36 +8,28 @@ class TokenStorage {
     static let shared = TokenStorage()
     private init() {}
 
-    // MARK: - Retrieve Tokens
     func getAccessToken() -> String? {
-        return UserDefaults.standard.string(forKey: tokenKey)
+        let token = UserDefaults.standard.string(forKey: tokenKey)
+        print("[TokenStorage] Retrieved access token: \(token ?? "nil")")
+        return token
     }
 
     func getRefreshToken() -> String? {
-        return UserDefaults.standard.string(forKey: refreshTokenKey)
+        let token = UserDefaults.standard.string(forKey: refreshTokenKey)
+        print("[TokenStorage] Retrieved refresh token: \(token ?? "nil")")
+        return token
     }
 
-    // MARK: - Save & Update Tokens
     func saveTokens(accessToken: String, refreshToken: String) {
         UserDefaults.standard.setValue(accessToken, forKey: tokenKey)
         UserDefaults.standard.setValue(refreshToken, forKey: refreshTokenKey)
-        print("Tokens saved successfully")
+        print("[TokenStorage] Saved access token: \(accessToken)")
+        print("[TokenStorage] Saved refresh token: \(refreshToken)")
     }
 
-    func setAccessToken(_ accessToken: String) {
-        UserDefaults.standard.setValue(accessToken, forKey: tokenKey)
-        print("Access token updated: \(accessToken)")
-    }
-
-    func setRefreshToken(_ refreshToken: String) {
-        UserDefaults.standard.setValue(refreshToken, forKey: refreshTokenKey)
-        print("Refresh token updated: \(refreshToken)")
-    }
-
-    // MARK: - Clear Tokens
     func clearTokens() {
         UserDefaults.standard.removeObject(forKey: tokenKey)
         UserDefaults.standard.removeObject(forKey: refreshTokenKey)
-        print("Tokens cleared")
+        print("[TokenStorage] Cleared all tokens")
     }
 }

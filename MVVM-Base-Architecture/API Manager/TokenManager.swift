@@ -1,41 +1,42 @@
 import Foundation
 
+/// MARK: - Token Manager
 class TokenManager {
     static let shared = TokenManager()
+    private let baseUrl = "https://api.vainu.io/api/v2/token_authentication"
     private init() {}
 
     func refreshToken(completion: @escaping (Result<Void, Error>) -> Void) {
         guard let refreshToken = TokenStorage.shared.getRefreshToken() else {
-            print("No refresh token available, user might need to re-login.")
+            print("No refresh token available. Clearing stored tokens.")
             TokenStorage.shared.clearTokens()
             completion(.failure(NetworkError.noData))
             return
         }
 
         let refreshEndpoint = TokenEndpoint.refresh(refreshToken: refreshToken)
-
-        let parameters = refreshEndpoint.body.flatMap {
-            try? JSONSerialization.jsonObject(with: $0, options: []) as? [String: Any]
-        }
+        let url = baseUrl + refreshEndpoint.path
+        print("Refreshing token using endpoint: \(url)")
 
         NetworkManager.shared.request(
-            baseURL: "https://www.dummyjson.com",
+            baseURL: baseUrl,
             endpoint: refreshEndpoint.path,
             method: refreshEndpoint.method,
-            parameters: parameters,
+            parameters: nil,
             headers: refreshEndpoint.headers,
-            requiresAuth: false,
             responseType: TokenModel.self
         ) { result in
             switch result {
             case .success(let tokenResponse):
-                print("Token Refreshed Successfully: \(tokenResponse.accessToken)")
-                TokenStorage.shared.setAccessToken(tokenResponse.accessToken)
-                TokenStorage.shared.setRefreshToken(tokenResponse.refreshToken)
+                TokenStorage.shared.saveTokens(
+                    accessToken: tokenResponse.accessToken,
+                    refreshToken: tokenResponse.refreshToken
+                )
+                print("Tokens saved successfully.")
                 completion(.success(()))
             case .failure(let error):
-                print("Token Refresh Failed: \(error.localizedDescription)")
                 TokenStorage.shared.clearTokens()
+                print("Token refresh failed with error: \(error.localizedDescription)")
                 completion(.failure(error))
             }
         }

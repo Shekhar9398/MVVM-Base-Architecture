@@ -1,17 +1,17 @@
 import Foundation
 
+@MainActor
 class CastsViewModel: ObservableObject {
     
     @Published var state: ViewState<CastsModel> = .idle
     private let castsService = CastsService()
-    private let repository = CastsRepository()
 
     func fetchCasts() {
         self.state = .loading
         
-        repository.fetchCastsData { [weak self] result in
+        castsService.getCastsData { [weak self] result in
+            guard let self = self else { return }
             DispatchQueue.main.async {
-                guard let self = self else { return }
                 switch result {
                 case .success(let casts):
                     self.state = .data(model: casts)

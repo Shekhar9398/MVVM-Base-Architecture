@@ -1,10 +1,10 @@
 
 import SwiftUI
 
-class UserService {
-    private let repository = UserRepository()
+class CompanyService {
+    private let repository = CompanyRepository()
 
-    func getUser(completion: @escaping (Result<UserModel, Error>) -> Void) {
+    func getUser(completion: @escaping (Result<CompanyModel, Error>) -> Void) {
         repository.fetchUserData { result in
             switch result {
             case .success(let user):

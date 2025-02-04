@@ -6,7 +6,6 @@ protocol Endpoint {
     var queryParameters: [String: String]? { get }
     var body: Data? { get }
     var headers: [String: String]? { get }
-    
     func createRequest(baseURL: URL) -> URLRequest
 }
 
